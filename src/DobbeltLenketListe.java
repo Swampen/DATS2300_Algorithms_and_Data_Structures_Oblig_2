@@ -46,7 +46,51 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     // konstruktør
     public DobbeltLenketListe(T[] a){
-        throw new UnsupportedOperationException("Ikke laget ennå!");
+        this();
+        Objects.requireNonNull(a, "Ikke tillatt med null-verdier!");
+
+
+
+        int i = 0;
+        if (a.length == 0){
+            return;
+        }
+        if (a.length == 1 && a[0] != null) {
+            hode = hale = new Node<>(a[0], null, null);
+            antall++;
+            i++;
+        }else {
+            while (a[i] != null) {
+                if (a[i] != null) {
+                    hode = new Node<>(a[i], null, null);
+                    antall++;
+                    i++;
+                    break;
+                }
+            }
+            if (a[i] == null) {
+                while (a[i] == null) {
+                    i++;
+                    if (a[i] != null) {
+                        hale = hode.neste = new Node<T>(a[i], hode, null);
+                        antall++;
+                        i++;
+                        break;
+                    }
+                }
+            }else {
+                hale = hode.neste = new Node<T>(a[i], hode, null);
+                antall++;
+                i++;
+            }
+        }
+
+        for (; i < a.length; i++){
+            if (a[i] != null) {
+                hale = hale.neste = new Node<T>(a[i], hale, null);
+                antall++;
+            }
+        }
     }
 
     // subliste
@@ -56,12 +100,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall(){
-        throw new UnsupportedOperationException("Ikke laget ennå!");
+        return antall;
     }
 
     @Override
     public boolean tom() {
-        throw new UnsupportedOperationException("Ikke laget ennå!");
+        return antall == 0;
     }
 
     @Override
