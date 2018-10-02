@@ -3,11 +3,15 @@ import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
-        Integer[] a = {1,2,3,4,5,6};
-        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>(a);
-        System.out.println(liste.toString() + " " + liste.omvendtString());
+        Character[] c = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',};
 
-        System.out.println(liste.hent(4));
+        DobbeltLenketListe<Character> liste = new DobbeltLenketListe<>(c);
+        System.out.println(liste.subliste(3,8));
+
+        System.out.println(liste.subliste(5,5));
+
+        System.out.println(liste.subliste(8,liste.antall()));
+
     }
 
 }
