@@ -44,44 +44,53 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         endringer = 0;
     }
 
-    // konstruktør
+    // Oppgave 1
     public DobbeltLenketListe(T[] a){
         this();
         Objects.requireNonNull(a, "Ikke tillatt med null-verdier!");
 
-
-
-        int i = 0;
         if (a.length == 0){
             return;
         }
-        if (a.length == 1 && a[0] != null) {
-            hode = hale = new Node<>(a[0], null, null);
+        int i = 0;
+        if (a[i] != null){
+            hode = hale = new Node<>(a[i], null, null);
             antall++;
             i++;
         }else {
-            while (a[i] != null) {
+            while (a[i] == null) {
+                i++;
+                if (i == a.length){
+                    return;
+                }
                 if (a[i] != null) {
-                    hode = new Node<>(a[i], null, null);
+                    hode = hale = new Node<>(a[i], null, null);
                     antall++;
                     i++;
                     break;
                 }
             }
-            if (a[i] == null) {
-                while (a[i] == null) {
-                    i++;
-                    if (a[i] != null) {
-                        hale = hode.neste = new Node<T>(a[i], hode, null);
-                        antall++;
-                        i++;
-                        break;
-                    }
-                }
-            }else {
-                hale = hode.neste = new Node<T>(a[i], hode, null);
-                antall++;
+        }
+        if (a.length == 1){
+            return;
+        }
+
+        if (a[i] != null){
+            hale = hode.neste = new Node<>(a[i], hode, null);
+            antall++;
+            i++;
+        }else {
+            while (a[i] == null) {
                 i++;
+                if (i == a.length){
+                    return;
+                }
+                if (a[i] != null) {
+                    hale = hode.neste = new Node<>(a[i], hode, null);
+                    antall++;
+                    i++;
+                    break;
+                }
             }
         }
 
