@@ -3,9 +3,13 @@ import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
-        String[] s = {null};
+        Integer[] s = {null,2,null};
 
-        System.out.println(s.length);
+        int i = 0;
+        while (s[i] != null){
+            System.out.println(s[i]);
+            i++;
+        }
     }
 
 }
