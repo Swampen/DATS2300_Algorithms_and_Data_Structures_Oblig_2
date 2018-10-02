@@ -173,7 +173,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public String toString() {
         if (antall == 0) {
-            return null;
+            return "[]";
         }
 
         StringBuilder s = new StringBuilder();
@@ -198,7 +198,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public String omvendtString(){
         if (antall == 0) {
-            return null;
+            return "[]";
         }
 
         StringBuilder s = new StringBuilder();
