@@ -116,8 +116,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     // subliste
     public Liste<T> subliste(int fra, int til){
-        T[] a = (T[]) new  Object[til-fra];
         fratilKontroll(antall, fra, til);
+        T[] a = (T[]) new  Object[til-fra];
         int indeks = 0;
 
         for(int i = fra; i < til; i++){

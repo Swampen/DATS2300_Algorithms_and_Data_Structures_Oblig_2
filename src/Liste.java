@@ -26,15 +26,13 @@ public interface Liste<T> extends Beholder<T> {
     public default void fratilKontroll(int tablengde, int fra, int til)
     {
         if (fra < 0)                                  // fra er negativ
-            throw new ArrayIndexOutOfBoundsException
-                    ("fra(" + fra + ") er negativ!");
+            throw new IndexOutOfBoundsException("fra(" + fra + ") er negativ!");
 
         if (til > tablengde)                          // til er utenfor tabellen
-            throw new ArrayIndexOutOfBoundsException
-                    ("til(" + til + ") > antall(" + tablengde + ")");
+            throw new IndexOutOfBoundsException("til(" + til + ") > antall(" + tablengde + ")");
 
         if (fra > til)                                // fra er større enn til
-            throw new IllegalArgumentException
-                    ("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
+            throw new IllegalArgumentException("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
+
     }
 }
