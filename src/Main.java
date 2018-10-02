@@ -3,12 +3,11 @@ import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
-        Integer[] s = {null,2,null};
-
-        int i = 0;
-        while (s[i] != null){
-            System.out.println(s[i]);
-            i++;
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>();
+        System.out.println(liste.toString() + " " + liste.omvendtString());
+        for(int i = 1; i <= 3; i++){
+            liste.leggInn(i);
+            System.out.println(liste.toString() + ""+ liste.omvendtString());
         }
     }
 
