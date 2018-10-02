@@ -154,12 +154,54 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     @Override
-    public String toString(){
-        throw new UnsupportedOperationException("Ikke laget ennå!");
+    public String toString() {
+        if (antall == 0) {
+            return null;
+        }
+
+        StringBuilder s = new StringBuilder();
+        s.append("[");
+
+        if(!tom()){
+            Node<T> p = hode;
+            s.append(p.verdi);
+
+            p = p.neste;
+
+            while(p != null){
+                s.append(",").append(" ").append(p.verdi);
+                p = p.neste;
+            }
+        }
+
+        s.append("]");
+
+        return s.toString();
     }
 
     public String omvendtString(){
-        throw new UnsupportedOperationException("Ikke laget ennå!");
+        if (antall == 0) {
+            return null;
+        }
+
+        StringBuilder s = new StringBuilder();
+        s.append("[");
+
+        if(!tom()){
+            Node<T> p = hale;
+            s.append(p.verdi);
+
+            p = p.forrige;
+
+            while(p != null){
+                s.append(",").append(" ").append(p.verdi);
+                p = p.forrige;
+            }
+        }
+
+        s.append("]");
+
+        return s.toString();
     }
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c){
