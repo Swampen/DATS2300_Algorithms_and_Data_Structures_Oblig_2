@@ -417,13 +417,33 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public void remove() {
-            if (!fjernOK) throw new IllegalStateException("Ulovlig tilstand!");
+            if (endringer != iteratorendringer){
+                throw new ConcurrentModificationException("Listen er endret!");
+            }
+            if (!fjernOK) {
+                throw new IllegalStateException("Ulovlig tilstand!");
+            }
 
-            fjernOK = false;               // remove() kan ikke kalles på nytt
+            fjernOK = false;
             Node<T> p = null;
-            Node<T> q = denne.forrige.forrige;
-
-
+            Node<T> q = null;
+            if (denne != null) {           //sjekker om denne ikke er etter halen
+                 p = denne.forrige.forrige;
+                 q = denne.forrige;
+            }else {
+                q = hale;
+                p = q.forrige;
+                q.verdi = null;
+                q.forrige = null;
+                if (p != null) {        //sjekker om p ikke er null
+                    p.neste = null;
+                    hale = p;
+                }
+                endringer++;
+                iteratorendringer++;
+                antall--;
+                return;
+            }
 
             if (q == hode){
                 q.verdi = null;
@@ -432,11 +452,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                     denne.forrige = null;
                     hode = denne;
                 }
-            }else if (q == hale){
-                q.verdi = null;
-                q.forrige = null;
-                p.neste = null;
-                hale = p;
             }else {
                 q.verdi = null;
                 q.forrige = null;
@@ -445,8 +460,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 p.neste = denne;
                 denne.forrige = p;
             }
-
-
+            endringer++;
+            iteratorendringer++;
+            antall--;
 
         }
 
