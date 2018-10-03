@@ -229,7 +229,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 }
                 break;
             }
-            p = q; q = q.neste;
+            p = q;
+            q = q.neste;
         }
 
         if (q == null){
@@ -237,8 +238,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }else if (q == hode){
             q.verdi = null;
             q.neste = null;
-            r.forrige = null;
-            hode = r;
+            if (antall != 1) {
+                r.forrige = null;
+                hode = r;
+            }
         }else if (q == hale){
             q.verdi = null;
             q.forrige = null;
@@ -252,7 +255,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             p.neste = r;
             r.forrige = p;
         }
-
         endringer++;
         antall--;
         return true;
@@ -265,16 +267,31 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         if (indeks == 0) {
             temp = hode.verdi;
-            hode = hode.neste;
-            if (antall == 1) hale = null;
-        } else {
-            Node<T> p = finnNode(indeks - 1);
-            Node<T> q = p.neste;
+            if (antall == 1) {
+                hode = null;
+                hale = null;
+            }else {
+                hode = hode.neste;
+                hode.forrige = null;
+            }
+        }else if(indeks == antall-1){
+            temp = hale.verdi;
+            hale = hale.forrige;
+            hale.neste = null;
+        } else{
+            Node<T> q = finnNode(indeks);
+            Node<T> p = q.forrige;
+            Node<T> r = q.neste;
             temp = q.verdi;
 
-            if (q == hale) hale = p;
-            p.neste = q.neste;
+            q.verdi = null;
+            q.forrige = null;
+            q.neste = null;
+
+            p.neste = r;
+            r.forrige = p;
         }
+        endringer++;
         antall--;
         return temp;
     }
@@ -297,12 +314,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             node = hode.neste;
             hode.neste = null;
             antall--;
-
-            node.verdi = null;
-            node.forrige = null;
-            hode = node.neste;
-            node.neste = null;
-            antall--;
+            hode = node;
         }
         long endTime = System.nanoTime();
         System.out.println(endTime-startTime);
