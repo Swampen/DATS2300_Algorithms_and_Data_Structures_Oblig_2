@@ -305,6 +305,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         System.out.println(endTime-startTime);
     }
 
+    @Override
     public void nullstill(){
         long startTime = System.nanoTime();
         Node<T> node = null;
@@ -381,7 +382,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public Iterator<T> iterator(int indeks){
-        throw new UnsupportedOperationException("Ikke laget ennå!");
+        indeksKontroll(indeks, false);
+        return new DobbeltLenketListeIterator(indeks);
     }
 
     private class DobbeltLenketListeIterator implements Iterator<T>{
@@ -396,7 +398,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         private DobbeltLenketListeIterator(int indeks){
-            throw new UnsupportedOperationException("Ikke laget ennå!");
+            denne = finnNode(indeks);
+            fjernOK = false;
+            iteratorendringer = endringer;
         }
 
         @Override
@@ -406,7 +410,19 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public T next(){
-            throw new UnsupportedOperationException("Ikke laget ennå!");
+            if (endringer != iteratorendringer) {
+                throw new ConcurrentModificationException("Listen er endret!");
+            }
+
+            if (!hasNext()) {
+                throw new NoSuchElementException("Tomt eller ingen verdier igjen!");
+            }
+
+            fjernOK = true;
+            T denneVerdi = denne.verdi;
+            denne = denne.neste;
+
+            return denneVerdi;
         }
 
         @Override
