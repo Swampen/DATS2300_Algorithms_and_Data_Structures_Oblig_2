@@ -241,7 +241,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void nullstill(){
-        throw new UnsupportedOperationException("Ikke laget ennå!");
+        long startTime = System.nanoTime();
+        while(!tom()){
+            fjern(0);
+        }
+        long endTime = System.nanoTime();
+        System.out.println(endTime-startTime);
     }
 
     @Override
