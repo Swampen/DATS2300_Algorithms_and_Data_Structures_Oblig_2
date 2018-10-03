@@ -12,7 +12,6 @@ public class Main {
         System.out.println(liste.toString());
 
         DobbeltLenketListe<Character> liste2 = new DobbeltLenketListe<>(c);
-        liste2.nullstill2();
         System.out.println(liste2.toString());
     }
 
