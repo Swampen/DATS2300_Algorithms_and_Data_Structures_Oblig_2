@@ -297,18 +297,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return temp;
     }
 
-    public void nullstill2(){
-        long startTime = System.nanoTime();
-        while(!tom()){
-            fjern(0);
-        }
-        long endTime = System.nanoTime();
-        System.out.println(endTime-startTime);
-    }
-
     @Override
     public void nullstill(){
-        long startTime = System.nanoTime();
         Node<T> node = null;
         while (!tom()){
             hode.verdi = null;
@@ -319,8 +309,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             hode = node;
         }
         endringer++;
-        long endTime = System.nanoTime();
-        System.out.println(endTime-startTime);
     }
 
     @Override
