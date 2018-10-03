@@ -279,11 +279,30 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return temp;
     }
 
-    @Override
-    public void nullstill(){
+    public void nullstill2(){
         long startTime = System.nanoTime();
         while(!tom()){
             fjern(0);
+        }
+        long endTime = System.nanoTime();
+        System.out.println(endTime-startTime);
+    }
+
+    public void nullstill(){
+        long startTime = System.nanoTime();
+        Node<T> node = null;
+        while (!tom()){
+            hode.verdi = null;
+            hode.forrige = null;
+            node = hode.neste;
+            hode.neste = null;
+            antall--;
+
+            node.verdi = null;
+            node.forrige = null;
+            hode = node.neste;
+            node.neste = null;
+            antall--;
         }
         long endTime = System.nanoTime();
         System.out.println(endTime-startTime);
