@@ -148,6 +148,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }else {
             hale = hale.neste = new Node<>(verdi, hale, null);
         }
+        endringer++;
         antall++;
         return true;
     }
@@ -317,6 +318,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             antall--;
             hode = node;
         }
+        endringer++;
         long endTime = System.nanoTime();
         System.out.println(endTime-startTime);
     }
