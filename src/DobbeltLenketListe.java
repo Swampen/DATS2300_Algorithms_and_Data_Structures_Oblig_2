@@ -435,7 +435,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 p = q.forrige;
                 q.verdi = null;
                 q.forrige = null;
-                if (p != null) {        //sjekker om p ikke er null
+                if (q != hode) {        //sjekker om p ikke er null
                     p.neste = null;
                     hale = p;
                 }
