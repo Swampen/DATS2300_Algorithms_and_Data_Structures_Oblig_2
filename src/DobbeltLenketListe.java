@@ -1,11 +1,12 @@
-import java.util.Iterator;
+/*Ole-Martin Heggen, s325905
+  Michael Mobæk Thoresen, s325903*/
 
 /////////// DobbeltLenketListe ////////////////////////////////////
-        import java.util.Comparator;
-        import java.util.ConcurrentModificationException;
-        import java.util.Iterator;
-        import java.util.NoSuchElementException;
-        import java.util.Objects;
+import java.util.Iterator;
+import java.util.Comparator;
+import java.util.ConcurrentModificationException;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class DobbeltLenketListe<T> implements Liste<T> {
     private static final class Node<T>{  // en indre nodeklasse
@@ -366,7 +367,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if (liste.antall() == 1){
             return;
         }
-        long tick = System.currentTimeMillis();
         boolean sorted = false;
         while (!sorted){
             sorted = true;
@@ -381,8 +381,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 }
             }
         }
-        long tock = System.currentTimeMillis();
-        System.out.println("Det tok: " + (tock-tick) + "ms");
     }
 
     @Override
