@@ -363,7 +363,26 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c){
-        throw new UnsupportedOperationException("Ikke laget ennå!");
+        if (liste.antall() == 1){
+            return;
+        }
+        long tick = System.currentTimeMillis();
+        boolean sorted = false;
+        while (!sorted){
+            sorted = true;
+            for (int i = 0; i < liste.antall()-1; i++){
+                T hentet1 = liste.hent(i);
+                T hentet2 = liste.hent(i+1);
+                if (c.compare(hentet1, hentet2) > 0){
+                    T temp = hentet1;
+                    liste.fjern(i);
+                    liste.leggInn(i+1, temp);
+                    sorted = false;
+                }
+            }
+        }
+        long tock = System.currentTimeMillis();
+        System.out.println("Det tok: " + (tock-tick) + "ms");
     }
 
     @Override
